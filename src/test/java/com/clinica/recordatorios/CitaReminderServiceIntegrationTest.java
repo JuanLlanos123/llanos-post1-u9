@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.context.TestPropertySource;
 
 import java.time.Clock;
 import java.time.Instant;
@@ -25,14 +24,13 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@TestPropertySource(properties = "spring.main.allow-bean-definition-overriding=true")
 class CitaReminderServiceIntegrationTest {
 
     @TestConfiguration
     static class ClockDeterminista {
         @Bean
         @Primary
-        public Clock clock() {
+        public Clock clockDeterminista() {
             return Clock.fixed(Instant.parse("2026-08-10T09:00:00Z"), ZoneId.of("UTC"));
         }
     }
